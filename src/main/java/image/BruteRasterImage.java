@@ -26,9 +26,9 @@ public class BruteRasterImage implements Image {
         util.Matrices.requiresNonZeroDimensions(colors);
         util.Matrices.requiresRectangularMatrix(colors);
 
-        width = util.Matrices.getColumnCount(colors);
-        height = util.Matrices.getRowCount(colors);
-        pixels = colors;
+        width = util.Matrices.getRowCount(colors);
+        height = util.Matrices.getColumnCount(colors);
+        pixels = colors.clone();
     }
 
     public void createRepresentation(){
