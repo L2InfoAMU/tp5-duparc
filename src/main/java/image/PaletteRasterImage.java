@@ -5,10 +5,8 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PaletteRasterImage implements Image {
+public class PaletteRasterImage extends RasterImage {
 
-    private int width;
-    private int height;
     private int[][] indexesOfColor;
     private List<Color> palette;
 
@@ -20,6 +18,10 @@ public class PaletteRasterImage implements Image {
     }
 
     public PaletteRasterImage(Color[][] pixels){
+        util.Matrices.requiresNonNull(pixels);
+        util.Matrices.requiresNonZeroDimensions(pixels);
+        util.Matrices.requiresRectangularMatrix(pixels);
+
         width = util.Matrices.getRowCount(pixels);
         height = util.Matrices.getColumnCount(pixels);
         createRepresentation();
@@ -61,23 +63,5 @@ public class PaletteRasterImage implements Image {
                 indexesOfColor[x][y] = palette.indexOf(color);
             }
         }
-    }
-
-    @Override
-    public int getWidth() {
-        return width;
-    }
-
-    @Override
-    public int getHeight() {
-        return height;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
     }
 }
