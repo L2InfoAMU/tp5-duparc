@@ -1,6 +1,7 @@
 package image;
 
 import javafx.scene.paint.Color;
+import viewer.SparseRasterImage;
 
 public class RasterUniformImageFactory implements ImageFactory {
     private int width;
@@ -22,6 +23,8 @@ public class RasterUniformImageFactory implements ImageFactory {
                 return new BruteRasterImage(color, width, height);
             case PALETTE:
                 return new PaletteRasterImage(color,width,height);
+            case SPARSE:
+                return new SparseRasterImage(color,width,height);
             default:
                 throw new NotSupportedException(rasterImageType + " is not supported");
         }
