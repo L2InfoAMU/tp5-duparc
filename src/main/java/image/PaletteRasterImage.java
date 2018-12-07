@@ -11,22 +11,11 @@ public class PaletteRasterImage extends RasterImage {
     private List<Color> palette;
 
     public PaletteRasterImage(Color color, int width, int height){
-        this.width = width;
-        this.height = height;
-        createRepresentation();
-        setPixelsColor(color);
+        super(color,width,height);
     }
 
     public PaletteRasterImage(Color[][] pixels){
-        util.Matrices.requiresNonNull(pixels);
-        util.Matrices.requiresNonZeroDimensions(pixels);
-        util.Matrices.requiresRectangularMatrix(pixels);
-
-        width = util.Matrices.getRowCount(pixels);
-        height = util.Matrices.getColumnCount(pixels);
-        createRepresentation();
-
-        setPixelsColor(pixels);
+        super(pixels);
     }
 
     public void createRepresentation(){
@@ -45,8 +34,8 @@ public class PaletteRasterImage extends RasterImage {
     }
 
     public void setPixelsColor(Color[][] pixels){
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
+        for (int x = 0; x < getWidth(); x++) {
+            for (int y = 0; y < getHeight(); y++) {
                 while (!palette.contains(pixels[x][y]))
                     palette.add(pixels[x][y]);
                 indexesOfColor[x][y] = palette.indexOf(pixels[x][y]);
@@ -58,8 +47,8 @@ public class PaletteRasterImage extends RasterImage {
         if (!palette.contains(color))
             palette.add(color);
 
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
+        for (int x = 0; x < getWidth(); x++) {
+            for (int y = 0; y < getHeight(); y++) {
                 indexesOfColor[x][y] = palette.indexOf(color);
             }
         }
